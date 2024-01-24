@@ -30,7 +30,7 @@
         </div>
         <div class="mb-3">
             <label for="os" class="form-label">Type</label>
-            <select id="os" formControlName="type" class="form-select">
+            <select id="os" formControlName="os" class="form-select">
                 @for (operationSystem of operationSystems; track operationSystem.key) {
                     <option [ngValue]="operationSystem.key">
                         {{ operationSystem.name }}
@@ -43,7 +43,7 @@
         </div>
         <div class="mb-3">
             <label for="ownerId" class="form-label">Owner</label>
-            <select id="ownerId" formControlName="type" class="form-select">
+            <select id="ownerId" formControlName="ownerId" class="form-select">
                 @for (owner of owners; track owner.id) {
                     <option [ngValue]="owner.id">
                         {{ owner.firstName }} {{ owner.lastName }}
