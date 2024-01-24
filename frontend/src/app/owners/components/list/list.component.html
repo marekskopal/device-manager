@@ -1,0 +1,42 @@
+﻿<div class="row">
+    <div class="col-md-8">
+        <h1>Owners</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <a (click)="addOwner()" class="btn btn-sm btn-success" tabindex="0"><fa-icon icon="plus"></fa-icon> Add Owner</a>
+    </div>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 40%">First Name</th>
+            <th style="width: 40%">Last Name</th>
+            <th style="width: 20%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (owner of owners; track owner.id) {
+            <tr>
+                <td>{{owner.firstName}}</td>
+                <td>{{owner.lastName}}</td>
+                <td class="text-end" style="white-space: nowrap">
+                    <a (click)="editOwner(owner.id)" class="btn btn-sm btn-primary me-2" tabindex="0"><fa-icon icon="edit"></fa-icon> Edit</a>
+                    <button (click)="deleteOwner(owner.id)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="owner.isDeleting">
+                        @if (owner.isDeleting) {
+                            <span class="spinner-border spinner-border-sm"></span>
+                        } @else {
+                            <span><fa-icon icon="trash"></fa-icon> Delete</span>
+                        }
+                    </button>
+                </td>
+            </tr>
+        }
+        @if (owners === null) {
+            <tr>
+                <td colspan="4" class="text-center">
+                    <span class="spinner-border spinner-border-lg align-center"></span>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

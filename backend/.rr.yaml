@@ -1,0 +1,29 @@
+version: '3'
+
+server:
+    command: "php /app/src/rr-worker.php"
+    env:
+        - XDEBUG_SESSION: 1
+        - XDEBUG_CONFIG: "remote_host=host.docker.internal"
+        - PHP_IDE_CONFIG: "serverName=PHPSTORM"
+http:
+    fcgi:
+        address: tcp://0.0.0.0:9000
+    middleware:
+        - gzip
+        - headers
+    headers:
+        cors:
+            allowed_origin: ${BACKEND_CORS_ALLOWED_ORIGIN:-*}
+            allowed_headers: ${BACKEND_CORS_ALLOWED_HEADERS:-*}
+            allowed_methods: ${BACKEND_CORS_ALLOWED_METHODS:-GET,POST,PUT,DELETE,OPTIONS}
+
+    pool:
+        supervisor:
+            watch_tick: 1s
+            ttl: 1200s
+            idle_ttl: 300s
+            max_worker_memory: 256
+        num_workers: ${BACKEND_ROADRUNNER_WORKERS:-5}
+        debug: ${BACKEND_ROADRUNNER_DEBUG:-0}
+

@@ -1,0 +1,40 @@
+﻿<div class="row">
+    <div class="col-md-8">
+        <h1>Devices</h1>
+    </div>
+    <div class="col-md-4 text-end">
+        <a (click)="addDevice()" class="btn btn-sm btn-success" tabindex="0"><fa-icon icon="plus"></fa-icon> Add Device</a>
+    </div>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 80%">Hostname</th>
+            <th style="width: 20%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (device of devices; track device.id) {
+            <tr>
+                <td>{{device.hostname}}</td>
+                <td class="text-end" style="white-space: nowrap">
+                    <a (click)="editDevice(device.id)" class="btn btn-sm btn-primary me-2" tabindex="0"><fa-icon icon="edit"></fa-icon> Edit</a>
+                    <button (click)="deleteDevice(device.id)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="device.isDeleting">
+                        @if (device.isDeleting) {
+                            <span class="spinner-border spinner-border-sm"></span>
+                        } @else {
+                            <span><fa-icon icon="trash"></fa-icon> Delete</span>
+                        }
+                    </button>
+                </td>
+            </tr>
+        }
+        @if (devices === null) {
+            <tr>
+                <td colspan="4" class="text-center">
+                    <span class="spinner-border spinner-border-lg align-center"></span>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

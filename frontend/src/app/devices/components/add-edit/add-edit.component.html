@@ -1,0 +1,65 @@
+﻿<div class="modal-header">
+    @if (isAddMode) {
+        <h4 class="modal-title">Add Device</h4>
+    } @else {
+        <h4 class="modal-title">Edit Device</h4>
+    }
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="hostname" class="form-label">Name</label>
+            <input id="hostname" type="text" formControlName="hostname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['hostname'].errors }" />
+            <div *ngIf="submitted && f['hostname'].errors" class="invalid-feedback">
+                <div *ngIf="f['hostname'].errors['required']">Hostname is required</div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="type" class="form-label">Type</label>
+            <select id="type" formControlName="type" class="form-select">
+                @for (deviceType of deviceTypes; track deviceType.key) {
+                    <option [ngValue]="deviceType.key">
+                        {{ deviceType.name }}
+                    </option>
+                }
+            </select>
+            <div *ngIf="submitted && f['type'].errors" class="invalid-feedback">
+                <div *ngIf="f['type'].errors['required']">Type is required</div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="os" class="form-label">Type</label>
+            <select id="os" formControlName="type" class="form-select">
+                @for (operationSystem of operationSystems; track operationSystem.key) {
+                    <option [ngValue]="operationSystem.key">
+                        {{ operationSystem.name }}
+                    </option>
+                }
+            </select>
+            <div *ngIf="submitted && f['os'].errors" class="invalid-feedback">
+                <div *ngIf="f['os'].errors['required']">OS is required</div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="ownerId" class="form-label">Owner</label>
+            <select id="ownerId" formControlName="type" class="form-select">
+                @for (owner of owners; track owner.id) {
+                    <option [ngValue]="owner.id">
+                        {{ owner.firstName }} {{ owner.lastName }}
+                    </option>
+                }
+            </select>
+            <div *ngIf="submitted && f['ownerId'].errors" class="invalid-feedback">
+                <div *ngIf="f['ownerId'].errors['required']">Owner is required</div>
+            </div>
+        </div>
+        <div>
+            <button [disabled]="loading" class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                Save
+            </button>
+            <a class="btn btn-link" (click)="activeModal.dismiss()" tabindex="0">Cancel</a>
+        </div>
+    </form>
+</div>
