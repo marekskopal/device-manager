@@ -314,7 +314,7 @@
     <rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
         <properties>
             <property name="rootNamespaces" type="array">
-                <element key="src" value="FinGather"/>
+                <element key="src" value="DeviceManager"/>
             </property>
         </properties>
     </rule>
