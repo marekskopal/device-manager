@@ -14,7 +14,7 @@ class InitDataMigration extends Migration
 	public function up(): void
 	{
 		$this->database()->insert('users')->values([
-			['id' => 1, 'email' => 'admin@example.com', 'password' => '$2y$10$Gv6vVjtQsz2n/1zk.wbyKOOON7ThrnpzJ0U7xJAUNHSE.4dJSyvSS', 'name' => 'Admin'],
+			['id' => 1, 'email' => 'admin@example.com', 'password' => '$2y$10$hIms8XZBw045eVf9EjzE7O.Ru7iCQ8iXY5aU8ktmzHlyw4l7DO69O', 'name' => 'Admin'],
 		])->run();
 	}
 
